@@ -2,11 +2,12 @@
   "name": "graphql",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start:local": "nodemon src/index.js",
-    "format": "prettier --write \"src/**/*.js\""
+    "start:local": "npm run build && nodemon dist/index.js",
+    "format": "prettier --write \"src/**/*.js\"",
+    "build": "tsc -p ."
   },
   "keywords": [],
   "author": "",
@@ -15,6 +16,7 @@
   "dependencies": {
     "apollo-server-core": "^3.13.0",
     "apollo-server-express": "^3.13.0",
+    "apollo-server-lambda": "^3.13.0",
     "cors": "^2.8.5",
     "express": "^4.18.2",
     "graphql": "^16.8.1"

@@ -1,4 +1,5 @@
 import { ApolloServer } from "apollo-server-express";
+import { ApolloServer as ApolloServerLambda } from "apollo-server-lambda";
 import { ApolloServerPluginDrainHttpServer } from "apollo-server-core";
 import http from "http";
 import express from "express";
@@ -30,4 +31,8 @@ app.listen(6060, () =>
 
 startApolloServer(app, httpServer);
 
-export default httpServer;
+const server = new ApolloServerLambda({typeDefs, resolvers, introspection: true});
+
+const handler = server.createHandler({cors:{origin: "*"}} as any);
+
+export default handler;

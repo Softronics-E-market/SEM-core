@@ -1,0 +1,16 @@
+  {
+    "compilerOptions": {
+      "module": "ES2015",
+      "declaration": false,
+      "removeComments": true,
+      "emitDecoratorMetadata": true,
+      "experimentalDecorators": true,
+      "esModuleInterop": true,
+      "moduleResolution": "node",
+      "allowSyntheticDefaultImports": true,
+      "sourceMap": true,
+      "outDir": "dist",
+      "strictBindCallApply": false,
+    },
+    "exclude": ["node_modules"]
+  }
