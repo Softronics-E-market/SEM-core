@@ -30,10 +30,5 @@
   "devDependencies": {
     "nodemon": "^3.0.3",
     "typescript": "^5.3.3"
-  },
-  "pre-commit": [
-    "ts.check",
-    "build",
-    "add-build"
-  ]
+  }
 }
