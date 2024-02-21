@@ -34,14 +34,14 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-import { ApolloServer } from "apollo-server-express";
-import { ApolloServer as ApolloServerLambda } from "apollo-server-lambda";
-import { ApolloServerPluginDrainHttpServer } from "apollo-server-core";
-import http from "http";
-import express from "express";
-import cors from "cors";
-import typeDefs from "./graphql/typeDefs/typeDefs.js";
-import resolvers from "./graphql/resolvers/resolver.js";
+import { ApolloServer } from 'apollo-server-express';
+import { ApolloServer as ApolloServerLambda } from 'apollo-server-lambda';
+import { ApolloServerPluginDrainHttpServer } from 'apollo-server-core';
+import http from 'http';
+import express from 'express';
+import cors from 'cors';
+import typeDefs from './graphql/typeDefs/typeDefs.js';
+import resolvers from './graphql/resolvers/resolver.js';
 var app = express();
 app.use(cors());
 app.use(express.json());
@@ -55,6 +55,7 @@ var startApolloServer = function (app, httpServer) { return __awaiter(void 0, vo
                     typeDefs: typeDefs,
                     resolvers: resolvers,
                     plugins: [ApolloServerPluginDrainHttpServer({ httpServer: httpServer })],
+                    cache: 'bounded',
                 });
                 return [4, server.start()];
             case 1:
@@ -65,10 +66,15 @@ var startApolloServer = function (app, httpServer) { return __awaiter(void 0, vo
     });
 }); };
 app.listen(6060, function () {
-    return console.log("Hosted url is -> http://localhost:6060/graphql, web -> https://graphql-js-hazel.vercel.app/graphql");
+    return console.log('Hosted url is -> http://localhost:6060/graphql, web -> https://graphql-js-hazel.vercel.app/graphql');
 });
 startApolloServer(app, httpServer);
-var server = new ApolloServerLambda({ typeDefs: typeDefs, resolvers: resolvers, introspection: true });
-var handler = server.createHandler({ cors: { origin: "*" } });
+var server = new ApolloServerLambda({
+    typeDefs: typeDefs,
+    resolvers: resolvers,
+    introspection: true,
+    cache: 'bounded',
+});
+var handler = server.createHandler({ cors: { origin: '*' } });
 export default handler;
 //# sourceMappingURL=index.js.map

@@ -1,11 +1,11 @@
-import { ApolloServer } from "apollo-server-express";
-import { ApolloServer as ApolloServerLambda } from "apollo-server-lambda";
-import { ApolloServerPluginDrainHttpServer } from "apollo-server-core";
-import http from "http";
-import express from "express";
-import cors from "cors";
-import typeDefs from "./graphql/typeDefs/typeDefs.js";
-import resolvers from "./graphql/resolvers/resolver.js";
+import { ApolloServer } from 'apollo-server-express';
+import { ApolloServer as ApolloServerLambda } from 'apollo-server-lambda';
+import { ApolloServerPluginDrainHttpServer } from 'apollo-server-core';
+import http from 'http';
+import express from 'express';
+import cors from 'cors';
+import typeDefs from './graphql/typeDefs/typeDefs.js';
+import resolvers from './graphql/resolvers/resolver.js';
 
 const app = express();
 app.use(cors());
@@ -17,6 +17,7 @@ const startApolloServer = async (app, httpServer) => {
     typeDefs,
     resolvers,
     plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
+    cache: 'bounded',
   });
 
   await server.start();
@@ -25,14 +26,19 @@ const startApolloServer = async (app, httpServer) => {
 
 app.listen(6060, () =>
   console.log(
-    "Hosted url is -> http://localhost:6060/graphql, web -> https://graphql-js-hazel.vercel.app/graphql"
-  )
+    'Hosted url is -> http://localhost:6060/graphql, web -> https://graphql-js-hazel.vercel.app/graphql',
+  ),
 );
 
 startApolloServer(app, httpServer);
 
-const server = new ApolloServerLambda({typeDefs, resolvers, introspection: true});
+const server = new ApolloServerLambda({
+  typeDefs,
+  resolvers,
+  introspection: true,
+  cache: 'bounded',
+});
 
-const handler = server.createHandler({cors:{origin: "*"}} as any);
+const handler = server.createHandler({ cors: { origin: '*' } } as any);
 
 export default handler;
