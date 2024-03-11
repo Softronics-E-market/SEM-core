@@ -1,17 +1,16 @@
-  {
+{
     "compilerOptions": {
-      "module": "ES2015",
-      "declaration": false,
-      "removeComments": true,
-      "emitDecoratorMetadata": true,
-      "experimentalDecorators": true,
+      "lib": ["es6", "dom", "esnext.asynciterable"],
+      "module": "commonjs",
+      "noImplicitReturns": false,
       "esModuleInterop": true,
-      "moduleResolution": "node",
-      "allowSyntheticDefaultImports": true,
+      "outDir": "lib",
       "sourceMap": true,
-      "outDir": "public",
-      "strictBindCallApply": false,
+      "allowSyntheticDefaultImports": true,
+      "target": "es2017",
+      "experimentalDecorators": true,
+      "emitDecoratorMetadata": true
     },
-    "exclude": ["node_modules"],
-    "include": ["./src/**/*"]
+    "compileOnSave": true,
+    "include": ["src", "printImage.ts"],
   }

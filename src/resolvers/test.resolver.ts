@@ -1,8 +1,8 @@
-const resolvers = {
+const TestResolver = {
   Query: {
     test: () => "Name jeichitoam mara",
     getApiVersion: () => "v1",
   },
 };
 
-export default resolvers;
+export default TestResolver;
